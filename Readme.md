@@ -17,4 +17,4 @@ Path where webkit2png output is kept.
 
 ## Usage
 For the moment simply
-git-webkit2png
+git-webkit2png.sh
