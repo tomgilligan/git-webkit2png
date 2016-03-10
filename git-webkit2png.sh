@@ -12,6 +12,13 @@ then
 
   for url in $urls
   do
-    webkit2png --ignore-ssl-check $selctor -F $url
+    # for now lets assume http and do a byte offset
+    outputFile="$(echo $url|cut -b 5-|tr -d ':/.-')-full.png"
+    if [[ -e $outputFile ]]
+    then
+      true
+    else
+      webkit2png --ignore-ssl-check $selctor -F $url
+    fi
   done
 fi
