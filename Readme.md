@@ -1,11 +1,10 @@
 # git-webkit2png
-A bumch of simple scripts to make using webkit2png in a git project
+A bunch of simple scripts to make using webkit2png in a git project
 easier.
 
 ## Requirements
 
 - webkit2png
-- imagemagick
 
 ## Config
 ### webkit2png.urlsCommand
