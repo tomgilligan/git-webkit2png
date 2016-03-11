@@ -6,7 +6,7 @@ warning=""
 selector=$(git config --get webkit2png.selector)
 if [[ -n "$selector" ]]
 then
-  let selctor="--selector=$selector"
+  selctor="--selector=$selector"
 fi
 urlsCommand=$(git config --get webkit2png.urlsCommand)
 if [[ -n "$urlsCommand" ]]
