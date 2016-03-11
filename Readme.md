@@ -15,5 +15,4 @@ A selector to pass to webkit2png.
 Something to run after generating screenshots
 
 ## Usage
-For the moment simply
-git-webkit2png.sh
+git webkit2png [clean | run | REF]

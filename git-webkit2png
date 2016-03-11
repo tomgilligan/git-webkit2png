@@ -1,18 +1,35 @@
 #!/bin/bash
-while [[ $1 = ?* ]]; do
-    case $1 in
-        -h|--help)
-            git --help webkit2png
-            exit 0
-            ;;
-        clear)
-            webkit2png-clear.sh
-            exit 0
-            ;;
-        *) ;;
-    esac
+if [[ -z $1 ]]; then
+  while [[ $1 = ?* ]]; do
+      case $1 in
+          -h|--help)
+              git --help webkit2png
+              exit 0
+              ;;
+          clear)
+              webkit2png-clear.sh
+              exit 0
+              ;;
+          run)
+              webkit2png-run.sh
+              exit 0
+              ;;
 
-shift
-done
+          *)
+              currentBranch=$(git rev-parse --abbrev-ref HEAD)
+              currentRef=$(git rev-parse HEAD)
+              git checkout $1
+              webkit2png-run.sh
+              givenRef=$(git rev-parse HEAD)
+              git checkout $currentBranch
+              webkit2png-run.sh
+              true #webkit2png-diff.sh
+              exit 0
+              ;;
+      esac
 
-webkit2png-run.sh
+  shift
+  done
+else
+  webkit2png-run.sh
+fi

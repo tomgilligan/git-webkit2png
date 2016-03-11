@@ -1,3 +1,3 @@
 _git_webkit2png(){
-  __gitcomp "clean"
+  __gitcomp "run clean $(git for-each-ref --format='%(refname:short)')"
 }
