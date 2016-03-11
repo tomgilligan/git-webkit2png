@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $1 -eq "clear" ]]
+then
+  webkit2png-clear.sh
+else
+  webkit2png-run.sh
+fi
