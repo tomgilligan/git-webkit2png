@@ -7,11 +7,11 @@ if [[ ! -z $1 ]]; then
               exit 0
               ;;
           clear)
-              webkit2png-clear.sh
+              git-webkit2png-clear.sh
               exit 0
               ;;
           run)
-              webkit2png-run.sh
+              git-webkit2png-run.sh
               exit 0
               ;;
 
@@ -19,11 +19,11 @@ if [[ ! -z $1 ]]; then
               currentBranch=$(git rev-parse --abbrev-ref HEAD)
               currentRef=$(git rev-parse HEAD)
               git checkout $1
-              webkit2png-run.sh
+              git-webkit2png-run.sh
               givenRef=$(git rev-parse HEAD)
               git checkout $currentBranch
-              webkit2png-run.sh
-              webkit2png-diff.sh $currentRef $givenRef
+              git-webkit2png-run.sh
+              git-webkit2png-diff.sh $currentRef $givenRef
               exit 0
               ;;
       esac
@@ -31,5 +31,5 @@ if [[ ! -z $1 ]]; then
   shift
   done
 else
-  webkit2png-run.sh
+  git-webkit2png-run.sh
 fi

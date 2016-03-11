@@ -9,4 +9,4 @@ all: install
 install:
 	$(INSTALL) *.sh git-webkit2png $(bindir)
 	$(INSTALL) git-webkit2png.1 $(mandir)
-	$(INSTALL) git-webkit2png-completion.bash $(completiondir)/git-webkit2png
+	$(INSTALL) git-webkit2png-completion.bash $(completiondir)git-webkit2png
