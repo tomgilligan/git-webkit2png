@@ -11,8 +11,8 @@ easier.
 A command to generate URLs to run with webkit2png.
 ### webkit2png.selector
 A selector to pass to webkit2png.
-### webkit2png.cachePath
-Path where webkit2png output is kept.
+### webkit2png.post
+Something to run after generating screenshots
 
 ## Usage
 For the moment simply

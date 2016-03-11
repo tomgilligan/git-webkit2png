@@ -1,5 +1,7 @@
 #!/bin/bash
 
+root=$(git rev-parse --show-toplevel)
+rev=$(git rev-parse HEAD)
 warning=""
 selector=$(git config --get webkit2png.selector)
 if [[ -n "$selector" ]]
@@ -10,6 +12,9 @@ urlsCommand=$(git config --get webkit2png.urlsCommand)
 if [[ -n "$urlsCommand" ]]
 then
   urls=$(eval $urlsCommand)
+  cd "$root/.git"
+  mkdir -p $rev
+  cd $rev
 
   for url in $urls
   do
@@ -31,3 +36,7 @@ then
     fi
   done
 fi
+
+post=$(git config --get webkit2png.post)
+eval $post
+cd $root
