@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO: parameter to ignore existing output
 
 root=$(git rev-parse --show-toplevel)
 rev=$(git rev-parse HEAD)
@@ -24,9 +25,11 @@ then
     then
       true
     else
+      # TODO add config option for adding any old options to webkit2png
       webkit2png --ignore-ssl-check $selctor -F $url
       if [[ ! -e $outputFile ]]
       then
+        # TODO make this warning more robust
         if [[ -z $warning ]]
         then
           echo "$outputFile was expected to exist after running webkit2png but it does not: won't be able to skip existing files"
