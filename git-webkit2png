@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ -z $1 ]]; then
+if [[ ! -z $1 ]]; then
   while [[ $1 = ?* ]]; do
       case $1 in
           -h|--help)
