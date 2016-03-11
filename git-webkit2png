@@ -1,7 +1,18 @@
 #!/bin/bash
-if [[ "$1" == "clear" ]]
-then
-  webkit2png-clear.sh
-else
-  webkit2png-run.sh
-fi
+while [[ $1 = ?* ]]; do
+    case $1 in
+        -h|--help)
+            git --help webkit2png
+            exit 0
+            ;;
+        clear)
+            webkit2png-clear.sh
+            exit 0
+            ;;
+        *) ;;
+    esac
+
+shift
+done
+
+webkit2png-run.sh
