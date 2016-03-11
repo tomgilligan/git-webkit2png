@@ -6,8 +6,8 @@ if [[ ! -z $1 ]]; then
               git --help webkit2png
               exit 0
               ;;
-          clear)
-              git-webkit2png-clear.sh
+          clean)
+              git-webkit2png-clean.sh
               exit 0
               ;;
           run)
