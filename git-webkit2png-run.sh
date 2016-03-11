@@ -5,6 +5,7 @@ root=$(git rev-parse --show-toplevel)
 rev=$(git rev-parse HEAD)
 warning=""
 selector=$(git config --get webkit2png.selector)
+dir="webkit2png"
 if [[ -n "$selector" ]]
 then
   selctor="--selector=$selector"
@@ -14,8 +15,8 @@ if [[ -n "$urlsCommand" ]]
 then
   urls=$(eval $urlsCommand)
   cd "$root/.git"
-  mkdir -p $rev
-  cd $rev
+  mkdir -p $dir/$rev
+  cd $dir/$rev
 
   for url in $urls
   do

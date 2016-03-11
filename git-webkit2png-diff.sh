@@ -1,6 +1,8 @@
 #!/bin/bash
 root=$(git rev-parse --show-toplevel)
-cd "$root/.git/"
+dir="webkit2png"
+mkdir -p "$root/.git/$dir"
+cd "$root/.git/$dir"
 outputFiles=$(comm -23 <(ls $1) <(ls $2))
 if [[ ! -z $outputFiles ]]; then
   echo Screenshots that only exist for $1
