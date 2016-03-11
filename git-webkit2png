@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ $1 -eq "clear" ]]
+if [[ "$1" == "clear" ]]
 then
   webkit2png-clear.sh
 else
