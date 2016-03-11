@@ -23,7 +23,7 @@ if [[ -z $1 ]]; then
               givenRef=$(git rev-parse HEAD)
               git checkout $currentBranch
               webkit2png-run.sh
-              true #webkit2png-diff.sh
+              webkit2png-diff.sh $currentRef $givenRef
               exit 0
               ;;
       esac
