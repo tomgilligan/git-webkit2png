@@ -1,5 +1,6 @@
 #!/bin/bash
 
+warning=""
 selector=$(git config --get webkit2png.selector)
 if [[ -n "$selector" ]]
 then
@@ -19,6 +20,14 @@ then
       true
     else
       webkit2png --ignore-ssl-check $selctor -F $url
+      if [[ ! -e $outputFile ]]
+      then
+        if [[ -z $warning ]]
+        then
+          echo "$outputFile was expected to exist after running webkit2png but it does not: won't be able to skip existing files"
+          let warning="dont"
+        fi
+      fi
     fi
   done
 fi
