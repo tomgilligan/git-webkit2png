@@ -1,10 +1,16 @@
 #!/bin/bash
+function currentBranch {
+  git rev-parse --abbrev-ref HEAD
+}
+
 function root {
   git rev-parse --show-toplevel
 }
+
 function sha {
   git rev-parse HEAD
 }
+
 dir="webkit2png"
 
 function gitConfigGet {
@@ -35,6 +41,12 @@ function cdOutputDir {
   cd "$(root)/.git"
   mkdir -p $dir/$(sha)
   cd $dir/$(sha)
+}
+
+function cdDiffDir {
+  cd "$(root)/.git"
+  mkdir -p "$dir/$(sha)$1"
+  cd "$dir/$(sha)$1"
 }
 
 function post {

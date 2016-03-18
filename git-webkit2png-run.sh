@@ -2,7 +2,6 @@
 # TODO: parameter to ignore existing output
 source git-webkit2png-shared.sh
 
-
 for url in $(urls "$(gitConfigGet webkit2png.urlsCommand)")
 do
   cdOutputDir
