@@ -4,6 +4,11 @@ function currentBranch {
 }
 
 function root {
+  # quick fix
+  while [[ ! -n $(git rev-parse --show-toplevel) ]]
+  do
+    cd ..
+  done
   git rev-parse --show-toplevel
 }
 
