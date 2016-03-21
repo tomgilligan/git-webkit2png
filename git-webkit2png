@@ -1,4 +1,5 @@
 #!/bin/bash
+source git-webkit2png-shared.sh
 if [[ ! -z $1 ]]; then
   while [[ $1 = ?* ]]; do
       case $1 in

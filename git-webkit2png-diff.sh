@@ -1,5 +1,5 @@
 #!/bin/bash
-source git-webkit-shared.sh
+source git-webkit2png-shared.sh
 mkdir -p "$(root)/.git/$dir"
 cd "$(root)/.git/$dir"
 
