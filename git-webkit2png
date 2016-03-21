@@ -21,7 +21,7 @@ if [[ ! -z $1 ]]; then
               git checkout $1
               git-webkit2png-run.sh
               givenRef=$(sha)
-              git checkout $(currentBranch)
+              git checkout $currentRef
               git-webkit2png-run.sh
               git-webkit2png-diff.sh $currentRef $givenRef
               exit 0
