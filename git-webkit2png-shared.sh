@@ -72,3 +72,28 @@ function cdDiffDir {
 function post {
   eval "$(git config --get webkit2png.post) $1"
 }
+
+# rev1 rev2 outputFile
+function compareR {
+  compare -metric AE "$(outputDir $1)/$3" "$(outputDir $2)/$3" /dev/null 2>/dev/null 1>/dev/null
+  if [ $? != "0" ]
+  then
+    composite "$(outputDir $1)/$3" "$(outputDir $2)/$3" -compose difference "$(diffDir $1 $2)/$3"
+    # auto level makes it somewhat easier to notice differences
+    convert  "$(diffDir $1 $2)/$3" -auto-level "$(diffDir $1 $2)/$3"
+  fi
+}
+
+# rev1 rev2 outputFiles
+function filterOutputFiles {
+  for outputFile in $3
+  do
+    # we are using the existence of a diff to determine should we skip generating one
+    # BUT we could have already compared and not had any differences
+    # we then end up generating a diff again even though if we recorded more state, we'd be able to tell that this isn't necessary
+    if [[ ! -e "$(diffDir $1 $2)/$outputFile" ]]
+    then
+      echo $outputFile
+    fi
+  done
+}
