@@ -1,16 +1,11 @@
 #!/bin/bash
 # TODO: parameter to ignore existing output
+# TODO add config option for adding any old options to webkit2png
 source git-webkit2png-shared.sh
 
-for url in $(urls "$(gitConfigGet webkit2png.urlsCommand)")
-do
-  cdOutputDir
-  # for now lets assume http and do a byte offset
-  if [[ ! -e $(urlToOutputFile $url) ]]
-  then
-    # TODO add config option for adding any old options to webkit2png
-    webkit2png --ignore-ssl-check $(selector $(gitConfigGet webkit2png.selector)) -F $url
-  fi
-done
+mkdir -p $(outputDir $(sha))
+# the main thing parallel gives us is job management and progress tracking
+# timing with different parameters, we don't get much out of the actual parallelilzation that it does
+urls "$(gitConfigGet webkit2png.urlsCommand)" |  tr ' ' $'\n' | parallel -j16 --will-cite --bar --delay 2 webkit2png --ignore-ssl-check -D $(outputDir $(sha)) $(selector $(gitConfigGet webkit2png.selector)) -F {} > /dev/null
 
-post $PWD
+post $(outputDir $(sha))

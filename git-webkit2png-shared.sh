@@ -34,7 +34,11 @@ function selector {
 function urls {
   if [[ -n "$1" ]]
   then
-    echo $(eval "$1")
+    url=$(eval "$1")
+    if [[ ! -e $(urlToOutputFile $url) ]]
+    then
+      echo $url
+    fi
   fi
 }
 
@@ -42,27 +46,24 @@ function urlToOutputFile {
   echo $(echo $1|cut -b 5-|tr -d ':/.-')-full.png
 }
 
+function outputDir {
+  echo "$(root)/.git/$dir/$1"
+}
+
 function cdOutputDir {
-  cd "$(root)/.git"
-  mkdir -p $dir/$(sha)
-  cd $dir/$(sha)
+  mkdir -p $(outputDir $1)
+  cd $(cd outputDir $1)
+}
+
+function diffDir {
+  echo "$(root)/.git/$dir/$1$2"
 }
 
 function cdDiffDir {
-  cd "$(root)/.git"
-  mkdir -p "$dir/$(sha)$1"
-  cd "$dir/$(sha)$1"
+  mkdir -p $(diffDir $1 $2)
+  cd $(diffDir $1 $2)
 }
 
 function post {
   eval "$(git config --get webkit2png.post) $1"
 }
-
-#root
-#sha
-#selector ""
-#selector "#content"
-#urls "echo 1 + 1 | bc"
-#urlToOutputFile 'http://localhost/file.html'
-#cdOutputDir
-#echo $PWD
