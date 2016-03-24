@@ -35,8 +35,13 @@ function urls {
   if [[ -n "$1" ]]
   then
     url=$(eval "$1")
-    if [[ ! -e $(urlToOutputFile $url) ]]
+    if [[ -n "$2" ]]
     then
+      if [[ ! -e "$(outputDir $2)/$(urlToOutputFile $url)" ]]
+      then
+        echo $url
+      fi
+    else
       echo $url
     fi
   fi
