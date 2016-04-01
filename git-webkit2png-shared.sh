@@ -97,3 +97,25 @@ function filterOutputFiles {
     fi
   done
 }
+
+function webkit2pngCommand {
+  echo webkit2png --ignore-ssl-check -D $(outputDir $(sha)) $(selector $(gitConfigGet webkit2png.selector)) -F
+}
+
+function parallelOptions {
+  echo -j16 --will-cite --bar --delay 2
+}
+
+function parallelFor {
+  which parallel > /dev/null
+  if [[ $? == "0" ]]
+  then
+    parallel $(parallelOptions) "$1 > /dev/null" {}
+  else
+    while read line
+    do
+      echo $line
+      eval "$1 $line" > /dev/null
+    done
+  fi
+}
