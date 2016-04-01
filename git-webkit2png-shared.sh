@@ -34,16 +34,19 @@ function selector {
 function urls {
   if [[ -n "$1" ]]
   then
-    url=$(eval "$1")
-    if [[ -n "$2" ]]
-    then
-      if [[ ! -e "$(outputDir $2)/$(urlToOutputFile $url)" ]]
+    urlx=$(eval "$1")
+    for url in $urlx
+    do
+      if [[ -n "$2" ]]
       then
+        if [[ ! -e "$(outputDir $2)/$(urlToOutputFile $url)" ]]
+        then
+          echo $url
+        fi
+      else
         echo $url
       fi
-    else
-      echo $url
-    fi
+    done
   fi
 }
 
@@ -99,11 +102,11 @@ function filterOutputFiles {
 }
 
 function webkit2pngCommand {
-  echo webkit2png --ignore-ssl-check -D $(outputDir $(sha)) $(selector $(gitConfigGet webkit2png.selector)) -F
+  echo "webkit2png --ignore-ssl-check -D $(outputDir $(sha)) $(selector $(gitConfigGet webkit2png.selector)) -F"
 }
 
 function parallelOptions {
-  echo -j16 --will-cite --bar --delay 2
+  echo "-j16 --will-cite --bar --delay 2"
 }
 
 function parallelFor {
