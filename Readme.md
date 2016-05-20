@@ -74,3 +74,43 @@ Getting help
 
 Use `git webkit2png` to get a short usage description, and `git
 webkit2png help` or `git bisect -h` to get a long usage description.
+
+------------------
+Step By Step Guide
+------------------
+
+`$ git clone git@github.com:tomgilligan/git-webkit2png.git`
+
+`$ cd git-webkit2png/`
+
+`$ make install`
+
+`$ brew install imagemagick webkit2png parallel`
+
+if on El Capitan, do https://github.com/paulhammond/webkit2png/issues/90
+
+Add configuration to `<gitrepository>/.git/config`
+
+	[webkit2png]
+		# bash list of URLs - can be generated
+		# urlsCommand = (bash list of URLs)
+		# urlsCommand = echo ("http://example.com/1" "http://example.com/2")
+		urlsCommand = "for i in $(ls $(git rev-parse --show-toplevel)/source/tests/|cut -f1 -d\".\"|grep -v \"^_\"); do echo \"http://localhost:8135/tests/$i.html\"; done"
+		# post command (run when done)
+		post = open .
+		# You can restrict screenshots to a parent element in each URL
+		selector = "#content"
+
+Run up your dev server if working locally; your machine needs to be able to access the URLs.
+
+`$ git webkit2png`
+
+When done... go to `/webkit2png/000000..111111/` for screenshots of the current version
+
+Run with any git hash or reference to generate further screenshots:
+
+`$ webkit2png HEAD@{1.week.ago}`
+
+When the second pass is done, there will be three directories: the first hash, the second, and a directory containing the diffs between the two.
+
+Further runs will add more sets of screenshots and diffs.
